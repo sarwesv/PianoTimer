@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>30 Minute Timer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+
+  <!-- Settings Dashboard Toggle Button -->
+  <button class="dashboard-toggle-btn" id="dashboardToggleBtn" aria-label="Open Settings Dashboard">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+      <circle cx="12" cy="12" r="3"></circle>
+    </svg>
+  </button>
+
+  <main class="timer-card">
+    <!-- Odometer Style Sliding Digits Display -->
+    <div class="timer-display" id="timerDisplay">
+      <div class="digit-col" id="m10"><div class="digit-track"><span>3</span></div></div>
+      <div class="digit-col" id="m1"><div class="digit-track"><span>0</span></div></div>
+      <div class="separator">:</div>
+      <div class="digit-col" id="s10"><div class="digit-track"><span>0</span></div></div>
+      <div class="digit-col" id="s1"><div class="digit-track"><span>0</span></div></div>
+    </div>
+
+    <!-- Main Action Buttons -->
+    <div class="controls-group">
+      <button class="btn btn-primary" id="startBtn">Start</button>
+      <button class="btn btn-secondary reset-btn" id="resetBtn" title="Reset Timer">Reset</button>
+    </div>
+
+    <!-- Completion View -->
+    <div class="completion-view" id="completionView">
+      <h1 class="completion-text" id="completionText">
+        <!-- Letter spans populated dynamically by JS -->
+      </h1>
+      <button class="btn btn-secondary" id="dismissBtn">Dismiss</button>
+    </div>
+  </main>
+
+  <!-- Slide-out Settings Dashboard Drawer -->
+  <div class="dashboard-overlay" id="dashboardOverlay"></div>
+  <aside class="dashboard-drawer" id="dashboardDrawer">
+    <div class="dashboard-header">
+      <h2>Timer Settings</h2>
+      <button class="close-btn" id="dashboardCloseBtn" aria-label="Close Dashboard">&times;</button>
+    </div>
+
+    <div class="dashboard-body">
+      <!-- Custom Message Section -->
+      <div class="setting-section">
+        <label class="setting-label" for="customMessageInput">Completion Message</label>
+        <div class="input-text-wrapper">
+          <input type="text" id="customMessageInput" value="Time’s Up!" placeholder="Enter end message..." maxlength="30" />
+        </div>
+      </div>
+
+      <!-- Quick Presets -->
+      <div class="setting-section">
+        <label class="setting-label">Quick Presets</label>
+        <div class="preset-grid">
+          <button class="preset-chip active" data-preset="1800">30 Min</button>
+          <button class="preset-chip" data-preset="1500">25 Min</button>
+          <button class="preset-chip" data-preset="900">15 Min</button>
+          <button class="preset-chip" data-preset="600">10 Min</button>
+          <button class="preset-chip" data-preset="300">5 Min</button>
+          <button class="preset-chip demo-chip" data-preset="10">10 Sec Demo</button>
+        </div>
+      </div>
+
+      <!-- Custom Time Inputs -->
+      <div class="setting-section">
+        <label class="setting-label">Custom Duration</label>
+        <div class="custom-time-inputs">
+          <div class="input-field">
+            <input type="number" id="customMins" min="0" max="99" value="30" />
+            <span>Minutes</span>
+          </div>
+          <div class="input-colon">:</div>
+          <div class="input-field">
+            <input type="number" id="customSecs" min="0" max="59" value="00" />
+            <span>Seconds</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary apply-btn" id="applyCustomBtn">Save Settings</button>
+    </div>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
